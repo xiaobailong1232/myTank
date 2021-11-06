@@ -11,7 +11,6 @@ import java.awt.*;
 @Data
 public class Bullet {
     private static final int SPEED = 10;
-    //private static final int WIDTH = 20, HEIGHT = 20;
     public static int WIDTH = ResourceMgr.bulletD.getWidth();
     public static int HEIGHT = ResourceMgr.bulletD.getHeight();
     private Group group = Group.BAD;
