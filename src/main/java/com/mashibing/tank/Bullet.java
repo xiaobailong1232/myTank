@@ -30,6 +30,7 @@ public class Bullet {
         rect.y=y;
         rect.width=WIDTH;
         rect.height=HEIGHT;
+        tf.bulletList.add(this);
     }
 
     public void paint(Graphics g) {
@@ -80,7 +81,7 @@ public class Bullet {
         Rectangle bullectRect = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle tankRect = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         if (bullectRect.intersects(tankRect)) {
-            this.die();
+            //this.die();
             tank.die();
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;

@@ -23,9 +23,9 @@ public class Tank {
     private boolean living = true;
     Rectangle rect = new Rectangle();
     private Random random = new Random();
+    FireStrategy fs ;
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
-        // super();
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -35,6 +35,17 @@ public class Tank {
         rect.y=y;
         rect.width=WIDTH;
         rect.height=HEIGHT;
+        if (group ==Group.GOOD){
+            String goodFSName = (String)PropertyMgr.get("goodFS");
+
+            try {
+                fs = (FireStrategy)Class.forName(goodFSName).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            fs=new DefaultFireStrategy();
+        }
 
     }
 
@@ -98,9 +109,7 @@ public class Tank {
     }
 
     public void fire() {
-        int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int bY = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tankFrame.bulletList.add(new Bullet(bX, bY, this.dir, this.group, this.tankFrame));
+       fs.fire(this);
     }
 
     public void die() {
